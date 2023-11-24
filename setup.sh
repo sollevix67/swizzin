@@ -30,6 +30,8 @@ touch $log
 function _source_setup() {
     echo -e "...\tInstalling git"      # The one true dependency
     apt-get update -q >> $log 2>&1     # Force update just in case sources were never pulled
+	LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/nginx
+	LC_ALL=C.UTF-8 add-apt-repository -y ppa:ondrej/php
     apt-get install git -y -qq >> $log # DO NOT PUT MORE DEPENDENCIES HERE
     echo -e "\tGit Installed"          # All dependencies go to scripts/update/10-dependencies.sh
 
