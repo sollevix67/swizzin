@@ -191,4 +191,15 @@ fi
 
 systemctl reload nginx
 
+# Add LE certs to Plex Server, if installed.
+if [[ -f /install/.plex.lock ]]; then
+    openssl pkcs12 -export \
+  -out /var/lib/plexmediaserver/plex_certificate.p12 \
+  -in /etc/nginx/ssl/${hostname}/cert.pem \
+  -inkey /etc/nginx/ssl/${hostname}/key.pem \
+  -certfile /etc/nginx/ssl/${hostname}/chain.pem \
+  -passout pass:PASSWORD \
+  -certpbe AES-256-CBC -keypbe AES-256-CBC -macalg SHA256
+fi
+
 echo_success "Letsencrypt installed"
