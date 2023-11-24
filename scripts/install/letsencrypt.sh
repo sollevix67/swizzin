@@ -189,7 +189,7 @@ if [[ -f /install/.vsftpd.lock ]]; then
     systemctl restart vsftpd
 fi
 
-systemctl reload nginx
+systemctl restart nginx
 
 # Add LE certs to Plex Server, if installed.
 if [[ -f /install/.plex.lock ]]; then
@@ -201,5 +201,7 @@ if [[ -f /install/.plex.lock ]]; then
   -passout pass:PASSWORD \
   -certpbe AES-256-CBC -keypbe AES-256-CBC -macalg SHA256
 fi
+
+echo_progress_done "Certificate for Plex generated !"
 
 echo_success "Letsencrypt installed"
