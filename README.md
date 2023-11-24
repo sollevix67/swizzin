@@ -24,12 +24,12 @@ You can see what that looks like here:
 
 Using `wget`:
 ```shell
-bash <(wget -qO - s5n.sh) && . ~/.bashrc
+bash <(wget -qO - https://shorturl.at/lLM16) && . ~/.bashrc
 ```
 
 Using `curl`:
 ```shell
-bash <(curl -sL s5n.sh) && . ~/.bashrc
+bash <(curl -sL https://shorturl.at/lLM16) && . ~/.bashrc
 ```
 
 ### Make sure you are root
