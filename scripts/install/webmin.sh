@@ -5,7 +5,7 @@
 
 _install_webmin() {
     echo_progress_start "Installing Webmin repo"
-    echo "deb [signed-by=/usr/share/keyrings/webmin-archive-keyring.gpg] https://download.webmin.com/download/newkey/repository stable contrib" > /etc/apt/sources.list.d/webmin.list
+    echo "deb [signed-by=/usr/share/keyrings/debian-webmin-developers.gpg] https://download.webmin.com/download/newkey/repository stable contrib" > /etc/apt/sources.list.d/webmin.list
     curl -s https://download.webmin.com/developers-key.asc | gpg --dearmor > /usr/share/keyrings/debian-webmin-developers.gpg 2>> "${log}"
     echo_progress_done "Repo added"
     apt_update
