@@ -148,19 +148,19 @@ chmod 700 /etc/nginx/ssl
 
 echo_progress_start "Registering certificates"
 if [[ ${cf} == yes ]]; then
-    /root/.acme.sh/acme.sh --force --issue --dns dns_cf -d ${hostname} >> $log 2>&1 || {
+    /root/.acme.sh/acme.sh --force --issue --dns dns_cf -d ${hostname} --dry-run >> $log 2>&1 || {
         echo_error "Certificate could not be issued."
         exit 1
     }
 else
     if [[ $main = yes ]]; then
-        /root/.acme.sh/acme.sh --force --issue --nginx -d ${hostname} >> $log 2>&1 || {
+        /root/.acme.sh/acme.sh --force --issue --nginx -d ${hostname} --dry-run >> $log 2>&1 || {
             echo_error "Certificate could not be issued."
             exit 1
         }
     else
         systemctl stop nginx
-        /root/.acme.sh/acme.sh --force --issue --standalone -d ${hostname} --pre-hook "systemctl stop nginx" --post-hook "systemctl start nginx" >> $log 2>&1 || {
+        /root/.acme.sh/acme.sh --force --issue --standalone -d ${hostname} --pre-hook "systemctl stop nginx" --post-hook "systemctl start nginx" --dry-run >> $log 2>&1 || {
             echo_error "Certificate could not be issued. Please check your info and try again"
             exit 1
         }
