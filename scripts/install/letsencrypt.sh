@@ -77,7 +77,7 @@ if [[ ${cf} == yes ]]; then
     fi
 
     if [[ -z $LE_CF_API ]]; then
-        echo_query "Enter CF API key"
+        echo_query "Enter CF Global API key"
         read -e api
     else
         api=$LE_CF_API
@@ -199,9 +199,9 @@ if [[ -f /install/.plex.lock ]]; then
   -inkey /etc/nginx/ssl/${hostname}/key.pem \
   -certfile /etc/nginx/ssl/${hostname}/chain.pem \
   -passout pass:PASSWORD \
-  -certpbe AES-256-CBC -keypbe AES-256-CBC -macalg SHA256
+  -certpbe AES-256-CBC -keypbe AES-256-CBC -macalg SHA256 >> $log 2>&1
+  then echo_progress_done "Certificate for Plex generated !"
+  else echo_info "Skipped generating certificate for Plex, it's not installed."
 fi
-
-echo_progress_done "Certificate for Plex generated !"
 
 echo_success "Letsencrypt installed"
