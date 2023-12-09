@@ -49,7 +49,7 @@ else
         echo_progress_done "Database installed"
     fi
     #Depends
-    apt_install unzip php8.2-mysql libxml2-dev php8.2-common php8.2-gd php8.2-curl php8.2-zip php8.2-xml php8.2-mbstring php8.2-imagick php8.2-gmp php8.2-bcmath php8.2-redis redis-server php8.2-intl php8.2-bz2
+    apt_install php8.2-apcu unzip php8.2-mysql libxml2-dev php8.2-common php8.2-gd php8.2-curl php8.2-zip php8.2-xml php8.2-mbstring php8.2-imagick php8.2-gmp php8.2-bcmath php8.2-redis redis-server php8.2-intl php8.2-bz2
     #a2enmod rewrite > /dev/null 2>&1
     cd /tmp
 
