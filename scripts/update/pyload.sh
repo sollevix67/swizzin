@@ -15,6 +15,7 @@
 
 if [[ -f /install/.pyload.lock ]]; then
     if [[ -f /etc/systemd/system/pyload@.service ]]; then
+        echo_warn "The version of pyload installed is susceptible to remote code execution (CVE-2023-0297). It is strongly recommended you uninstall pyload. No fixes will be forthcoming."
         echo_progress_start "Updating pyLoad to use pyenv"
         codename=$(lsb_release -cs)
         user=$(cut -d: -f1 < /root/.master.info)
