@@ -149,19 +149,19 @@ chmod 700 /etc/nginx/ssl
 
 echo_progress_start "Registering certificates"
 if [[ ${cf} == yes ]]; then
-    /root/.acme.sh/acme.sh --force --issue --dns dns_cf --ocsp-must-staple -d ${hostname} >> $log 2>&1 || {
+    /root/.acme.sh/acme.sh --force --issue -k 4096 --dns dns_cf --ocsp-must-staple -d ${hostname} >> $log 2>&1 || {
         echo_error "Certificate could not be issued."
         exit 1
     }
 else
     if [[ $main = yes ]]; then
-        /root/.acme.sh/acme.sh --force --issue --nginx --ocsp-must-staple -d ${hostname} >> $log 2>&1 || {
+        /root/.acme.sh/acme.sh --force --issue -k 4096 --nginx --ocsp-must-staple -d ${hostname} >> $log 2>&1 || {
             echo_error "Certificate could not be issued."
             exit 1
         }
     else
         systemctl stop nginx
-        /root/.acme.sh/acme.sh --force --issue --standalone -d ${hostname} --pre-hook "systemctl stop nginx" --post-hook "systemctl start nginx" >> $log 2>&1 || {
+        /root/.acme.sh/acme.sh --force --issue -k 4096 --standalone --ocsp-must-staple -d ${hostname} --pre-hook "systemctl stop nginx" --post-hook "systemctl start nginx" >> $log 2>&1 || {
             echo_error "Certificate could not be issued. Please check your info and try again"
             exit 1
         }
@@ -194,7 +194,8 @@ systemctl restart nginx
 
 # Add LE certs to Plex Server, if installed.
 if [[ -f /install/.plex.lock ]]; then
-    openssl pkcs12 -export -out /var/lib/plexmediaserver/plex_certificate.p12 -in /etc/nginx/ssl/${hostname}/cert.pem -inkey /etc/nginx/ssl/${hostname}/key.pem -certfile /etc/nginx/ssl/${hostname}/chain.pem -passout pass:PASSWORD -certpbe AES-256-CBC -keypbe AES-256-CBC -macalg SHA256 && chmod 755 /var/lib/plexmediaserver/plex_certificate.p12 >> $log 2>&1;
+    openssl pkcs12 -export -out /var/lib/plexmediaserver/plex_certificate.p12 -in /etc/nginx/ssl/${hostname}/cert.pem -inkey /etc/nginx/ssl/${hostname}/key.pem -certfile /etc/nginx/ssl/${hostname}/chain.pem -passout pass:PASSWORD -certpbe AES-256-CBC -keypbe AES-256-CBC -macalg SHA256
+	chmod 755 /var/lib/plexmediaserver/plex_certificate.p12 >> $log 2>&1;
 	echo_progress_done "Certificate for Plex generated !"
 	else echo_info "Skipped generating certificate for Plex, it's not installed."
 fi

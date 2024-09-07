@@ -62,7 +62,7 @@ touch $templog
 openssl dhparam -out dhparam.pem 2048 >> $templog 2>&1 &
 
 # Install packages for nginx in the foreground
-APT="nginx libnginx-mod-http-fancyindex subversion ssl-cert php8.3-fpm libfcgi0ldbl php8.3-cli php8.3-dev php8.3-xml php8.3-curl php8.3-xmlrpc php-json php8.3-mbstring php8.3-opcache php8.3-zip ${geoip} ${mcrypt}"
+APT="nginx libnginx-mod-http-fancyindex subversion ssl-cert php-phar php8.3-fpm libfcgi0ldbl php8.3-cli php8.3-dev php8.3-xml php8.3-curl php8.3-xmlrpc php-json php8.3-mbstring php8.3-opcache php8.3-zip ${geoip} ${mcrypt}"
 apt_install $APT
 
 # Wait for the background task of openssl dhparm generation to finish
