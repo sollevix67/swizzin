@@ -194,9 +194,11 @@ systemctl restart nginx
 
 # Add LE certs to Plex Server, if installed.
 if [[ -f /install/.plex.lock ]]; then
+    echo_progress_start "Generating a pkcs12 certificate that Plex server can use... "
     openssl pkcs12 -export -out /var/lib/plexmediaserver/plex_certificate.p12 -in /etc/nginx/ssl/${hostname}/cert.pem -inkey /etc/nginx/ssl/${hostname}/key.pem -certfile /etc/nginx/ssl/${hostname}/chain.pem -passout pass:PASSWORD -certpbe AES-256-CBC -keypbe AES-256-CBC -macalg SHA256
 	chmod 755 /var/lib/plexmediaserver/plex_certificate.p12 >> $log 2>&1;
 	echo_progress_done "Certificate for Plex generated !"
+	echo_warn "You need to configure this sertificate into the Plex server settings !"
 	else echo_info "Skipped generating certificate for Plex, it's not installed."
 fi
 
