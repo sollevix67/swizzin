@@ -44,7 +44,7 @@ function _install_wg() {
     case ${codename} in
         buster)
             check_debian_backports
-            PKGS+=(wireguard-dkms qrencode iptables)
+            PKGS+=(wireguard qrencode iptables)
             ;;
         *)
             PKGS=(wireguard qrencode iptables)
