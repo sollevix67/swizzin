@@ -126,6 +126,7 @@ apt_install socat
 
 if [[ ! -f /root/.acme.sh/acme.sh ]]; then
     echo_progress_start "Installing ACME script"
+	mkdir -p /root/.acme.sh/ >> $log 2>&1
     curl https://get.acme.sh | sh >> $log 2>&1
     echo_progress_done
 fi
