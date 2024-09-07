@@ -1,11 +1,11 @@
 #!/bin/bash
 
 systemctl stop -q nginx
-[[ $(_os_codename) =~ ^(focal|buster|bullseye)$ ]] && geoip="php8.2-geoip" || geoip=""
-APT="nginx libnginx-mod-http-fancyindex subversion ssl-cert libfcgi0ldbl php8.2-fpm php8.2-cli php8.2-dev php8.2-xml php8.2-curl php8.2-xmlrpc php8.2-mbstring php8.2-opcache php8.2-zip ${geoip} ${mcrypt}"
+[[ $(_os_codename) =~ ^(focal|buster|bullseye)$ ]] && geoip="php8.3-geoip" || geoip="php-geoip"
+APT="nginx libnginx-mod-http-fancyindex subversion ssl-cert libfcgi0ldbl php8.3-fpm php8.3-cli php8.3-dev php8.3-xml php8.3-curl php8.3-xmlrpc php8.3-mbstring php8.3-opcache php8.3-zip ${geoip} ${mcrypt}"
 apt_remove $APT
 
-LIST='nginx-* php8.2-* php-*'
+LIST='nginx-* php8.3-* php-*'
 apt_remove --purge $LIST
 
 rm -rf /etc/nginx

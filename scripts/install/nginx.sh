@@ -42,7 +42,7 @@ case $codename in
         ;;
     *)
         mcrypt=
-        geoip=
+        geoip="php-geoip"
 
         ;;
 esac
