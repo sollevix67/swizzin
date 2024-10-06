@@ -38,11 +38,11 @@ fi
 case $codename in
     focal | buster | bullseye | noble)
         mcrypt="php8.3-mcrypt"
-        geoip="php-geoip"
+        geoip= #"php-geoip"
         ;;
     *)
         mcrypt=
-        geoip="php-geoip"
+        geoip= #"php-geoip"
 
         ;;
 esac
