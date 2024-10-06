@@ -11,7 +11,7 @@ function update_nginx() {
     fi
     # Install missing nginx packages
     [[ $(lsb_release -cs) =~ ^(focal|buster|bullseye|noble)$ ]] && geoip="" || geoip=""
-    LIST="php8.3-fpm php8.3-cli php8.3-dev php8.3-xml php8.3-curl php8.3-xmlrpc php8.3-json php8.3-mbstring php8.3-opcache php8.3-xml php8.3-zip ${geoip}"
+    LIST="php8.3-fpm php8.3-cli php8.3-dev php8.3-xml php8.3-curl php8.3-xmlrpc php8.3-mbstring php8.3-opcache php8.3-xml php8.3-zip ${geoip}"
     apt_install $LIST
     # Purge php7.0-fpm on all platforms
     cd /etc/php
