@@ -36,7 +36,7 @@ if [[ -n $(pidof apache2) ]]; then
 fi
 
 case $codename in
-    focal | buster | bullseye)
+    focal | buster | bullseye | noble)
         mcrypt="php8.3-mcrypt"
         geoip="php-geoip"
         ;;
