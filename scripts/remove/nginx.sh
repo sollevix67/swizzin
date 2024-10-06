@@ -1,7 +1,7 @@
 #!/bin/bash
 
 systemctl stop -q nginx
-[[ $(_os_codename) =~ ^(focal|buster|bullseye)$ ]] && geoip="php8.3-geoip" || geoip="php-geoip"
+[[ $(_os_codename) =~ ^(focal|buster|bullseye|noble)$ ]] && geoip= || geoip=
 APT="nginx libnginx-mod-http-fancyindex subversion ssl-cert libfcgi0ldbl php8.3-fpm php8.3-cli php8.3-dev php8.3-xml php8.3-curl php8.3-xmlrpc php8.3-mbstring php8.3-opcache php8.3-zip ${geoip} ${mcrypt}"
 apt_remove $APT
 

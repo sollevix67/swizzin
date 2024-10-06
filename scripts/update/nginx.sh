@@ -10,8 +10,8 @@ function update_nginx() {
         systemctl reload nginx
     fi
     # Install missing nginx packages
-    [[ $(lsb_release -cs) =~ ^(focal|buster|bullseye)$ ]] && geoip="php-geoip" || geoip=""
-    LIST="php-fpm php-cli php-dev php-xml php-curl php-xmlrpc php-json php-mbstring php-opcache php-xml php-zip ${geoip}"
+    [[ $(lsb_release -cs) =~ ^(focal|buster|bullseye|noble)$ ]] && geoip="" || geoip=""
+    LIST="php8.3-fpm php8.3-cli php8.3-dev php8.3-xml php8.3-curl php8.3-xmlrpc php8.3-json php8.3-mbstring php8.3-opcache php8.3-xml php8.3-zip ${geoip}"
     apt_install $LIST
     # Purge php7.0-fpm on all platforms
     cd /etc/php
@@ -25,7 +25,7 @@ function update_nginx() {
     . /etc/swizzin/sources/functions/php
     phpversion=$(php_service_version)
     sock="php${phpversion}-fpm"
-    # Reconfigure php.ini for php-fpm, enable opcache php module, set environment PATH var for php
+    # Reconfigure php.ini for php8.3-fpm, enable opcache php module, set environment PATH var for php
     for version in $phpv; do
         if [[ -f /etc/php/$version/fpm/php.ini ]]; then
             echo_progress_start "Updating config for PHP $version"
@@ -221,7 +221,7 @@ FIAC
     echo_progress_done
 
     #TODO: This needs an if statement
-    echo_progress_start "Restarting php-fpm and nginx"
+    echo_progress_start "Restarting php8.3-fpm and nginx"
     #shellcheck source=sources/functions/php
     . /etc/swizzin/sources/functions/php
     restart_php_fpm
